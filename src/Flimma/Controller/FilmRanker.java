@@ -6,7 +6,7 @@ import Flimma.Model.UserRating;
 
 import java.util.*;
 
-public class FilmRanker {
+public final class FilmRanker {
 
     // min amount of votes for film needed to be recommended
     private static final int MIN_VOTES_IMDB = 1000;

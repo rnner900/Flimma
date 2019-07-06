@@ -1,9 +1,13 @@
-package Flimma.View;
+package Flimma.Page;
 
+import Flimma.Controller.FilmRecommender;
 import Flimma.Main;
+import Flimma.Model.Film;
 import Flimma.Parser;
 
-public class StartView extends View {
+import java.util.List;
+
+public class StartPage implements Page {
     @Override
     public void show() {
         Table table = new Table("%-50.50s");
@@ -14,22 +18,28 @@ public class StartView extends View {
     }
 
     @Override
-    public View onInput(String input) throws Exception {
-        View result = null;
+    public Page onInput(String input) throws Exception {
+        Page result = null;
 
         String[] args = Parser.parseArgs(input);
         switch (args[0]) {
             case "list":
                 // list database content
-                result = new ListView(Main.getDatabase().getFilms());
+                result = new ListPage(Main.getDatabase().getFilms());
                 break;
             case "logout":
                 // logout
-                result = new LoginView();
+                result = new LoginPage();
                 break;
             case "exit":
                 // exit
                 Main.exit();
+                break;
+            case "recommend":
+                int limit = Integer.parseInt(args[1]);
+                List<Film> films = new FilmRecommender().getRecommendation(limit);
+
+                result = new ListPage(films);
                 break;
             default:
                 // invalid input

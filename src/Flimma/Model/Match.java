@@ -11,6 +11,8 @@ public class Match implements Comparable<Match> {
     private double actorScore;
     private double directorScore;
 
+    private double totalScore;
+
     public Match(Film film) {
         this.film = film;
     }
@@ -47,13 +49,13 @@ public class Match implements Comparable<Match> {
         this.directorScore = directorScore;
     }
 
-    public double getTotalScore() {
-        return (ratingScore + genreScore + actorScore + directorScore) / 4;
+    public void calculateTotalScore() {
+        totalScore = (ratingScore + genreScore + actorScore + directorScore) / 4;
     }
 
     @Override
     public int compareTo(Match o) {
-        return Double.compare(getTotalScore(), o.getTotalScore());
+        return Double.compare(totalScore, o.totalScore);
     }
 
     public Film getFilm() {

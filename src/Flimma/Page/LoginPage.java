@@ -1,8 +1,8 @@
-package Flimma.View;
+package Flimma.Page;
 
 import Flimma.Main;
 
-public class LoginView extends View {
+public class LoginPage implements Page {
     @Override
     public void show() {
         Table table = new Table("%-50.50s");
@@ -14,10 +14,10 @@ public class LoginView extends View {
     }
 
     @Override
-    public View onInput(String input) {
+    public Page onInput(String input) {
 
         if (Main.logIn(input)) {
-            return new StartView();
+            return new StartPage();
         }
         return null;
     }

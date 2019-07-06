@@ -1,6 +1,5 @@
 package Flimma.Controller;
 
-import Flimma.Main;
 import Flimma.Model.*;
 import Flimma.Model.UserRating;
 
@@ -10,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DatabaseSaver {
+public final class DatabaseSaver {
 
     // saves a database to a file
     public void saveToFile(Database database, File file) throws IOException {

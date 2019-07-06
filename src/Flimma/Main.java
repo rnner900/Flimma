@@ -1,14 +1,16 @@
 package Flimma;
 
+import java.io.BufferedReader;
 import java.io.File;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import Flimma.Model.*;
 import Flimma.Controller.*;
-import Flimma.View.*;
+import Flimma.Page.*;
 
 public class Main {
 
@@ -41,7 +43,16 @@ public class Main {
         }
     }
 
+    // getter methods
+    public static Database getDatabase() {
+        return database;
+    }
 
+    public static User getUser() {
+        return user;
+    }
+
+    // set user
     public static boolean logIn(String username) {
         user = database.getUsers().get(username);
 
@@ -53,56 +64,76 @@ public class Main {
         return true;
     }
 
+
     public static void exit() {
         // exit interactive mode
         exit = true;
     }
 
-    // getter methods
-    public static Database getDatabase() {
-        return database;
-    }
 
-    public static User getUser() {
-        return user;
+
+    // load static mode
+    private static void loadStatic(String[] args) {
+
+        FilmRecommender recommender = new FilmRecommender();
+
+        for(String str : args) {
+            if (str.startsWith("--genre")) {
+               // str.split("=")[1];
+            }
+            else if (str.startsWith("--film")) {
+            }
+            else if (str.startsWith("--limit")) {
+                int limit =  Integer.parseInt(str.split("=")[1]);
+            }
+            else if (str.startsWith("--actor")) {
+            }
+            else if (str.startsWith("--director")) {
+            }
+            else if (str.startsWith("--ratedBy")) {
+            }
+        }
+
+        List<Film> films = new ArrayList<>();
+
+        ListPage result = new ListPage(films);
+
+        result.show();
     }
 
     // load interactive mode
     private static void loadInteractive() {
 
-        View activeView = new LoginView();
-        activeView.show();
-
-        Stack<View> history = new Stack<>();
+        Page activePage = new StartPage();
 
         while (!exit)
         {
+            // check for login
+            if (getUser() == null) {
+                activePage = new LoginPage();
+            }
+
+            // show page
+            activePage.show();
+
+            // user input
             System.out.print("> ");
-            String input = Input.waitForInput();
+            String input = waitForInput();
 
             if (input.startsWith("help")) {
-                activeView.printHelp();
-            }
-            else if (input.startsWith("back")) {
-                activeView = history.pop();
-                clearPage();
-                activeView.show();
+                // print help of current page
+                activePage.printHelp();
             }
             else {
-                View nextView = null;
                 try {
-                    nextView = activeView.onInput(input);
-                } catch (Exception e) {
-                    System.out.println("Invalid input. Type in 'help' to get more information...");
-                }
-
-                if (nextView != null) {
-                    if (nextView != activeView) {
-                        history.push(activeView);
-                        activeView = nextView;
-                    }
+                    // call current page onInput. It returns the next page to show
+                    activePage = activePage.onInput(input);
                     clearPage();
-                    activeView.show();
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                    // page will throw error if input is not valid (index out of range for missing arguments for example)
+                    System.out.println("Please check your input. Type in 'help' to get more information...");
                 }
             }
         }
@@ -117,38 +148,16 @@ public class Main {
         }
     }
 
-    // load static mode
-    private static void loadStatic(String[] args) {
-
-        DatabaseFilterer filter = new DatabaseFilterer(database, database.getFilms());
-
-        for(String str : args) {
-            if (str.startsWith("--genre")) {
-               filter.genre(str.split("=")[1]);
-            }
-            else if (str.startsWith("--film")) {
-                filter.name(str.split("=")[1]);
-            }
-            else if (str.startsWith("--limit")) {
-                int limit =  Integer.parseInt(str.split("=")[1]);
-                filter.limit(limit);
-            }
-            else if (str.startsWith("--actor")) {
-                filter.actor(str.split("=")[1]);
-            }
-            else if (str.startsWith("--director")) {
-                filter.director(str.split("=")[1]);
-            }
-            else if (str.startsWith("--ratedBy")) {
-                filter.ratedBy(str.split("=")[1]);
-            }
+    private static String waitForInput() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String input = null;
+        try {
+            input = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        List<Film> films = filter.toList();
-
-        ListView result = new ListView(films);
-
-        result.show();
+        return input;
     }
 
     private static void clearPage() {

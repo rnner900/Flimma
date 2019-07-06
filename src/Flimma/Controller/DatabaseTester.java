@@ -1,4 +1,4 @@
 package Flimma.Controller;
 
-public class DatabaseTester {
+public final class DatabaseTester {
 }

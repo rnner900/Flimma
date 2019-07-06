@@ -1,14 +1,13 @@
 package Flimma.Controller;
 
 import Flimma.Model.*;
-import Flimma.Parser;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class DatabaseLoader {
+public final class DatabaseLoader {
 
     // id look up tables for deserialization
     private Map<Integer, Actor> actorIds;
@@ -95,7 +94,7 @@ public class DatabaseLoader {
 
     private void loadActor(String line) {
         String[] values = parseValues(line);
-        int id = Parser.parseInt(values[0]);
+        int id = Integer.parseInt(values[0]);
 
         if (!actorIds.containsKey(id)) {
             Actor actor = new Actor(values[1].trim());
@@ -107,7 +106,7 @@ public class DatabaseLoader {
     }
     private void loadFilm(String line) {
         String[] values = parseValues(line);
-        int id = Parser.parseInt(values[0]);
+        int id = Integer.parseInt(values[0]);
 
         if (!filmIds.containsKey(id)) {
             if (values.length < 5) {
@@ -115,8 +114,8 @@ public class DatabaseLoader {
                 System.out.println(Arrays.toString(values));
             }
 
-            int imdbVotes = Parser.parseInt(values[5]);
-            double imdbRating = Parser.parseDouble(values[6]);
+            int imdbVotes = Integer.parseInt(values[5]);
+            double imdbRating = Double.parseDouble(values[6]);
 
             Film film = new Film(values[1].trim(),values[2],values[3], values[4], imdbVotes, imdbRating, id);
             filmIds.put(id, film);
@@ -127,7 +126,7 @@ public class DatabaseLoader {
     }
     private void loadDirector(String line) {
         String[] values = parseValues(line);
-        int id = Parser.parseInt(values[0]);
+        int id = Integer.parseInt(values[0]);
 
         if (!directorIds.containsKey(id)) {
             Director director = new Director(values[1].trim());
@@ -139,8 +138,8 @@ public class DatabaseLoader {
     }
     private void loadActorFilm(String line) {
         String[] values = parseValues(line);
-        int actorId = Parser.parseInt(values[0]);
-        int filmId = Parser.parseInt(values[1]);
+        int actorId = Integer.parseInt(values[0]);
+        int filmId = Integer.parseInt(values[1]);
 
         if (actorIds.containsKey(actorId) && filmIds.containsKey(filmId)) {
             Film film = filmIds.get(filmId);
@@ -152,8 +151,8 @@ public class DatabaseLoader {
     }
     private void loadDirectorFilm(String line) {
         String[] values = parseValues(line);
-        int directorId = Parser.parseInt(values[0]);
-        int filmId = Parser.parseInt(values[1]);
+        int directorId = Integer.parseInt(values[0]);
+        int filmId = Integer.parseInt(values[1]);
 
         if (directorIds.containsKey(directorId) && filmIds.containsKey(filmId)) {
             Film film = filmIds.get(filmId);
@@ -166,7 +165,7 @@ public class DatabaseLoader {
     private void loadRating(String line) {
         String[] values = parseValues(line);
         String userName = values[0];
-        int filmId = Parser.parseInt(values[2]);
+        int filmId = Integer.parseInt(values[2]);
 
         User user = database.getUsers().get(userName);
         if (user == null) {
@@ -178,7 +177,7 @@ public class DatabaseLoader {
 
         if (filmIds.containsKey(filmId)) {
             Film film = filmIds.get(filmId);
-            double rating = Parser.parseDouble(values[1]);
+            double rating = Double.parseDouble(values[1]);
 
             // add rating to database
             database.addRating(user, film, rating);

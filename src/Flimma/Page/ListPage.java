@@ -1,6 +1,6 @@
-package Flimma.View;
+package Flimma.Page;
 
-import Flimma.Controller.DatabaseFilterer;
+import Flimma.Controller.DatabaseFilter;
 import Flimma.Main;
 import Flimma.Model.*;
 import Flimma.Model.UserRating;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class ListView extends View {
+public class ListPage implements Page {
 
     private static final int MAX_COUNT = 200;
 
@@ -22,7 +22,7 @@ public class ListView extends View {
      *
      * @param films     a list of films
      */
-    public ListView(List<Film> films) {
+    public ListPage(List<Film> films) {
         if (films == null) {
             films = new ArrayList<>();
         }
@@ -63,85 +63,59 @@ public class ListView extends View {
     }
 
     @Override
-    public View onInput(String input) throws Exception {
+    public Page onInput(String input) throws Exception {
 
+        Page nextPage = this;
         String[] args = Parser.parseArgs(input);
 
-        Database database = Main.getDatabase();
-        User myUser = Main.getUser();
-
-        // filter for filtering films
-        DatabaseFilterer filter = new DatabaseFilterer(database, films);
-
-        View result = null;
-        List<Film> newFilms = null;
-
-        // check cmd and go to according page
-        String cmd = args[0];
-
-        switch (cmd) {
+        switch (args[0]) {
             // ACTIONS
             case "start":
-                result = new StartView();
+                nextPage = new StartPage();
                 break;
 
             case "rate":
                 // rate a film
-                int filmId = Parser.parseInt(args[1]);
+                int filmId = Integer.parseInt(args[1]);
+                double rating = Double.parseDouble(args[2]);
                 Film film = films.get(filmId);
-                double rating = Parser.parseDouble(args[2]);
-                database.addRating(myUser, film, rating);
 
-                result = this;
-                break;
-
-            case "recommend":
-                // get recommendations
-                int amount = Parser.parseInt(args[1]);
-                result = new RListView(amount);
+                // add rating to database
+                Main.getDatabase().addRating(Main.getUser(), film, rating);
                 break;
 
             // FILTER
             case "genre":
-                filter.genre(args[1]);
-                newFilms = filter.toList();
+                films = DatabaseFilter.filterGenre(films, args[1]);
                 break;
 
             case "film":
-                filter.name(args[1]);
-                newFilms = filter.toList();
+                films = DatabaseFilter.filterName(films, args[1]);
                 break;
 
             case "actor":
-                filter.actor(args[1]);
-                newFilms = filter.toList();
+                films = DatabaseFilter.filterActor(films, args[1]);
                 break;
 
             case "director":
-                filter.director(args[1]);
-                newFilms = filter.toList();
+                films = DatabaseFilter.filterDirector(films, args[1]);
                 break;
 
             case "limit":
-                int limit = Parser.parseInt(args[1]);
-                filter.limit(limit);
-                newFilms = filter.toList();
+                int limit = Integer.parseInt(args[1]);
+                films = DatabaseFilter.limit(films, limit);
                 break;
 
             case "ratedBy":
-                filter.ratedBy(args[1]);
-                newFilms = filter.toList();
+                films = DatabaseFilter.filterRatedBy(films, args[1]);
                 break;
 
             default:
                 throw new Exception();
         }
 
-        if (newFilms != null) {
-            result = new ListView(newFilms);
-        }
-
-        return result;
+        // return next page
+        return nextPage;
     }
 
     @Override
@@ -150,7 +124,6 @@ public class ListView extends View {
         Table table = new Table("%-25.25s","%-20.20s");
         table.printLine("ACTIONS","");
         table.printColumn("start", "go back to start");
-        table.printColumn("back", "go to previous view");
         table.printColumn("rate      <filmId> <stars>", "rate a film");
         table.printColumn("recommend <amount>", "get recommendation");
         table.printColumn("", "");

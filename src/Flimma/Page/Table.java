@@ -1,4 +1,4 @@
-package Flimma.View;
+package Flimma.Page;
 
 public class Table {
 

@@ -14,10 +14,6 @@ public class Database {
 
     private List<UserRating> userRatings;
 
-
-    // save map for saving ratings on the go
-    private Map<Film, Integer> filmIds;
-
     public Database() {
         users = new HashMap<>();
         films = new ArrayList<>();
@@ -54,8 +50,6 @@ public class Database {
     public List<Film> getFilms() {
         return films;
     }
-
-    public Map<Film, Integer> getFilmIds() { return filmIds; }
 
     public List<Actor> getActors() {
         return actors;

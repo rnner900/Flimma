@@ -1,25 +1,31 @@
 package Flimma.Page;
 
-import Flimma.Main;
+import Flimma.Application;
+import Flimma.Input;
+import Flimma.Model.Database;
 
-public class LoginPage implements Page {
+public class LoginPage extends Page {
+    public LoginPage(Database database) {
+        super(database);
+    }
+
     @Override
     public void show() {
         Table table = new Table("%-50.50s");
         table.printLine();
-        table.printColumnB("Flimma Log In");
+        table.printRowB("Flimma Log In");
         table.printLine();
 
         System.out.println("Please enter a username:");
     }
 
     @Override
-    public Page onInput(String input) {
+    public Page onInput(Input input) {
 
-        if (Main.logIn(input)) {
-            return new StartPage();
+        if (Application.setUser(input.getInput())) {
+            return new StartPage(database);
         }
-        return null;
+        return this;
     }
 
     @Override

@@ -1,10 +1,21 @@
 package Flimma.Page;
 
-public interface Page {
+import Flimma.Functions.InputException;
+import Flimma.Input;
+import Flimma.Model.Database;
 
-    void show();
 
-    Page onInput(String input) throws Exception;
+public abstract class Page {
 
-    void printHelp();
+    protected final Database database;
+
+    public Page(Database database) {
+        this.database = database;
+    }
+
+    public abstract void show();
+
+    public abstract Page onInput(Input input) throws InputException;
+
+    public abstract  void printHelp();
 }

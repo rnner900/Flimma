@@ -1,7 +1,7 @@
 package Flimma.Model;
 
 public class Actor {
-    private String name;
+    private final String name;
 
     public Actor(String name) {
         this.name = name;
@@ -10,5 +10,10 @@ public class Actor {
     // getter methods
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

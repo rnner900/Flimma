@@ -6,23 +6,24 @@ import java.util.List;
 import java.util.Set;
 
 public class Film {
-    private String name;
-    private String plot;
-    private String genre;
-    private String relased;
+    private final String name;
+    private final String plot;
+    private final String relased;
 
-    private int imdbVotes;
-    private double imdbRating;
+    private final int imdbVotes;
+    private final double imdbRating;
 
-    private Set<Director> directors;
-    private Set<Actor> actors;
+    private final Set<Director> directors;
+    private final Set<Actor> actors;
+    private final Set<String> genres;
 
-    private List<UserRating> userRatings;
+    private final List<UserRating> userRatings;
 
-    public Film(String name, String plot, String genre, String released, int imdbVotes, double imdbRating, int id) {
+    public Film(String name, String plot, String genre, String released, int imdbVotes, double imdbRating) {
         this.name = name;
         this.plot = plot;
-        this.genre = genre;
+        this.genres = new HashSet<>();
+        this.genres.add(genre);
         this.relased = released;
 
         this.directors = new HashSet<>();
@@ -48,8 +49,6 @@ public class Film {
 
     public String getPlot() { return plot; }
 
-    public String getGenre() { return genre; }
-
     public String getRelased() { return relased; }
 
     public int getImdbVotes() {
@@ -64,9 +63,14 @@ public class Film {
 
     public Set<Actor> getActors() { return actors; }
 
+    public Set<String> getGenres() { return genres; }
+
     public List<UserRating> getUserRatings() {
         return userRatings;
     }
 
-
+    @Override
+    public String toString() {
+        return getDisplayName();
+    }
 }

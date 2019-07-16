@@ -1,49 +1,57 @@
 package Flimma.Page;
 
-import Flimma.Controller.FilmRecommender;
-import Flimma.Main;
+import Flimma.Application;
+import Flimma.Functions.FilmRecommender;
+import Flimma.Functions.InputException;
+import Flimma.Input;
+import Flimma.Model.Database;
 import Flimma.Model.Film;
-import Flimma.Parser;
 
 import java.util.List;
 
-public class StartPage implements Page {
+public class StartPage extends Page {
+
+    public StartPage(Database database) {
+        super(database);
+    }
+
     @Override
     public void show() {
         Table table = new Table("%-50.50s");
         table.printLine();
-        table.printColumnB("Hey " + Main.getUser().getUserName() + ", welcome to Flimma!");
-        table.printColumn("");
+        table.printRowB("Hey " + Application.getUser().getUserName() + ", welcome to Flimma!");
+        table.printLine();
+        table.printRow("You can always type in 'help' to get help for");
+        table.printRow("the page you are on and 'exit' to exit the app");
+        table.printRow("");
         printHelp();
     }
 
     @Override
-    public Page onInput(String input) throws Exception {
+    public Page onInput(Input input) throws InputException {
         Page result = null;
 
-        String[] args = Parser.parseArgs(input);
-        switch (args[0]) {
+        switch (input.getCmd()) {
             case "list":
                 // list database content
-                result = new ListPage(Main.getDatabase().getFilms());
+                result = new ListPage(database);
                 break;
             case "logout":
                 // logout
-                result = new LoginPage();
-                break;
-            case "exit":
-                // exit
-                Main.exit();
+                result = new LoginPage(database);
                 break;
             case "recommend":
-                int limit = Integer.parseInt(args[1]);
-                List<Film> films = new FilmRecommender().getRecommendation(limit);
+                int limit = input.argToInt(1);
+                FilmRecommender fr = new FilmRecommender(database);
+                fr.setScoresAuto(Application.getUser(), limit);
+                List<Film> films = fr.getRecommendation();
 
-                result = new ListPage(films);
+                ListPage listPage = new ListPage(database);
+                listPage.setFilms(films);
                 break;
             default:
                 // invalid input
-                throw new Exception();
+                throw new InputException();
         }
 
         return result;
@@ -53,9 +61,9 @@ public class StartPage implements Page {
     public void printHelp() {
         Table table = new Table("%-20.20s", "%-27.27s");
         table.printLine("ACTIONS", "");
-        table.printColumn("list", "list database");
-        table.printColumn("logout", "logout");
-        table.printColumn("exit", "exit program");
+        table.printRow("list", "list database");
+        table.printRow("logout", "logout");
+        table.printRow("exit", "exit program");
         table.printLine();
     }
 }

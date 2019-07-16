@@ -1,21 +1,19 @@
 package Flimma.Model;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Database {
-    private Map<String, User> users;
-
-    private List<Film> films;
-    private List<Actor> actors;
-    private List<Director> directors;
-
-    private List<UserRating> userRatings;
+    private final List<User> users;
+    private final List<Film> films;
+    private final List<Actor> actors;
+    private final List<Director> directors;
+    private final List<UserRating> userRatings;
 
     public Database() {
-        users = new HashMap<>();
+        users = new ArrayList<>();
         films = new ArrayList<>();
         actors = new ArrayList<>();
         directors = new ArrayList<>();
@@ -33,7 +31,7 @@ public class Database {
             user.getUserRatings().add(userRating);
             film.getUserRatings().add(userRating);
 
-            // add rating additionaly to database
+            // add rating additionally to database
             userRatings.add(userRating);
         }
         else {
@@ -43,23 +41,23 @@ public class Database {
     }
 
     // getter methods
-    public Map<String, User> getUsers() {
+    @NotNull public List<User> getUsers() {
         return users;
     }
 
-    public List<Film> getFilms() {
+    @NotNull public List<Film> getFilms() {
         return films;
     }
 
-    public List<Actor> getActors() {
+    @NotNull public List<Actor> getActors() {
         return actors;
     }
 
-    public List<Director> getDirectors() {
+    @NotNull public List<Director> getDirectors() {
         return directors;
     }
 
-    public List<UserRating> getUserRatings() {
+    @NotNull public List<UserRating> getUserRatings() {
         return userRatings;
     }
 }

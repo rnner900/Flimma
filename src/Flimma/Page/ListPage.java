@@ -1,43 +1,36 @@
 package Flimma.Page;
 
-import Flimma.Controller.DatabaseFilter;
-import Flimma.Main;
-import Flimma.Model.*;
+import Flimma.Application;
+import Flimma.Functions.DatabaseFilter;
+import Flimma.Functions.InputException;
+import Flimma.Input;
+import Flimma.Model.Database;
+import Flimma.Model.Film;
 import Flimma.Model.UserRating;
-import Flimma.Parser;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
-public class ListPage implements Page {
+public class ListPage extends Page {
 
     private static final int MAX_COUNT = 200;
 
     private List<Film> films;
 
-    /**
-     * Prints a table of a given list of films to the console.
-     * The user can filter, recommend or rate films.
-     *
-     * @param films     a list of films
-     */
-    public ListPage(List<Film> films) {
-        if (films == null) {
-            films = new ArrayList<>();
-        }
-        this.films = films;
+    public ListPage(Database database) {
+        super(database);
+        films = database.getFilms();
     }
 
     @Override
     public void show() {
 
         // print table of films
-        Table table = new Table("%-5.5s", "%-30.30s", "%-30.30s", "%-8.8s", "%-10.10s", "%-30.30s", "%-30.30s", "%-5.5s", "%-5.5s", "%-5.5s", "%-5.5s");
+        Table table = new Table("%-5.5s", "%-30.30s", "%-30.30s", "%-20.20s", "%-10.10s", "%-30.30s", "%-30.30s", "%-5.5s", "%-5.5s", "%-5.5s", "%-5.5s");
 
         // print table head
         table.printLine();
-        table.printColumnB("Id", "Name", "Plot", "Genre", "Released", "Actors", "Directors", "Imdb Votes", "Imdb ★", "Avg ★", "My ★");
+        table.printRowB("Id", "Name", "Plot", "Genre", "Released", "Actors", "Directors", "Imdb Votes", "Imdb ★", "Avg ★", "My ★");
         table.printLine();
 
         // print table content
@@ -46,7 +39,7 @@ public class ListPage implements Page {
 
             Film film = films.get(i);
 
-            UserRating myUserRating = Main.getUser().getUserRating(film);
+            UserRating myUserRating = Application.getUser().getUserRating(film);
             double myRating = (myUserRating == null) ? 0 : myUserRating.getRating();
             myRating *= 2;
 
@@ -55,7 +48,7 @@ public class ListPage implements Page {
 
             // rating form 0-10 like imdb
             avgRating *= 2;
-            table.printColumn(i, film.getDisplayName(), film.getPlot(), film.getGenre(), film.getRelased(), actorsToString(film.getActors()), directorsToString(film.getDirectors()), film.getImdbVotes(), film.getImdbRating(), avgRating, myRating);
+            table.printRow(i, film, film.getPlot(), collectionToString(film.getGenres()), film.getRelased(), collectionToString(film.getActors()), collectionToString(film.getDirectors()), film.getImdbVotes(), film.getImdbRating(), avgRating, myRating);
         }
 
         // print table end
@@ -63,55 +56,55 @@ public class ListPage implements Page {
     }
 
     @Override
-    public Page onInput(String input) throws Exception {
+    public Page onInput(Input input) throws InputException {
 
         Page nextPage = this;
-        String[] args = Parser.parseArgs(input);
 
-        switch (args[0]) {
+        DatabaseFilter df = new DatabaseFilter(database);
+
+        switch (input.getCmd()) {
             // ACTIONS
             case "start":
-                nextPage = new StartPage();
+                nextPage = new StartPage(database);
                 break;
 
             case "rate":
                 // rate a film
-                int filmId = Integer.parseInt(args[1]);
-                double rating = Double.parseDouble(args[2]);
+                int filmId = input.argToInt(1);
+                double rating = input.argToDouble(2);
                 Film film = films.get(filmId);
 
                 // add rating to database
-                Main.getDatabase().addRating(Main.getUser(), film, rating);
+                database.addRating(Application.getUser(), film, rating);
                 break;
 
             // FILTER
             case "genre":
-                films = DatabaseFilter.filterGenre(films, args[1]);
+                films = df.filterGenre(films, input.argToString(1));
                 break;
 
             case "film":
-                films = DatabaseFilter.filterName(films, args[1]);
+                films = df.filterName(films, input.argToString(1));
                 break;
 
             case "actor":
-                films = DatabaseFilter.filterActor(films, args[1]);
+                films = df.filterActor(films, input.argToString(1));
                 break;
 
             case "director":
-                films = DatabaseFilter.filterDirector(films, args[1]);
+                films = df.filterDirector(films, input.argToString(1));
                 break;
 
             case "limit":
-                int limit = Integer.parseInt(args[1]);
-                films = DatabaseFilter.limit(films, limit);
+                films = df.limit(films, input.argToInt(1));
                 break;
 
             case "ratedBy":
-                films = DatabaseFilter.filterRatedBy(films, args[1]);
+                films = df.filterRatedBy(films, input.argToString(1));
                 break;
 
             default:
-                throw new Exception();
+                throw new InputException();
         }
 
         // return next page
@@ -123,44 +116,28 @@ public class ListPage implements Page {
         // print help
         Table table = new Table("%-25.25s","%-20.20s");
         table.printLine("ACTIONS","");
-        table.printColumn("start", "go back to start");
-        table.printColumn("rate      <filmId> <stars>", "rate a film");
-        table.printColumn("recommend <amount>", "get recommendation");
-        table.printColumn("", "");
+        table.printRow("start", "go back to start");
+        table.printRow("rate      <filmId> <stars>", "rate a film");
+        table.printRow("recommend <amount>", "get recommendation");
+        table.printRow("", "");
         table.printLine("FILTER", "");
-        table.printColumn("genre     <genre>", "filter by genre");
-        table.printColumn("film      <filmname>", "filter by filmname");
-        table.printColumn("actor     <actor>", "filter by actor");
-        table.printColumn("director  <director>", "filter by director");
-        table.printColumn("limit     <limit>", "limit results");
-        table.printColumn("ratedBy   <username>", "get film rated by");
+        table.printRow("genre     <genre>", "filter by genre");
+        table.printRow("film      <filmname>", "filter by filmname");
+        table.printRow("actor     <actor>", "filter by actor");
+        table.printRow("director  <director>", "filter by director");
+        table.printRow("limit     <limit>", "limit results");
+        table.printRow("ratedBy   <username>", "get film rated by");
         table.printLine();
     }
 
-    /**
-     * Converts a Set of actors to a string for printing
-     *
-     * @param actors    a Set of actors
-     * @return          the result string
-     */
-    private String actorsToString(Set<Actor> actors) {
-        StringBuilder sb = new StringBuilder();
-        for (Actor actor : actors) {
-            sb.append(actor.getName()).append(", ");
-        }
-        return sb.toString();
+    public void setFilms(List<Film> films) {
+        this.films = films;
     }
 
-    /**
-     * Converts a Set of directors to a string for printing
-     *
-     * @param directors a Set of directors
-     * @return          the result string
-     */
-    private String directorsToString(Set<Director> directors) {
+    private String collectionToString(Collection collection) {
         StringBuilder sb = new StringBuilder();
-        for (Director director : directors) {
-            sb.append(director.getName()).append(", ");
+        for (Object object : collection) {
+            sb.append(object).append(", ");
         }
         return sb.toString();
     }

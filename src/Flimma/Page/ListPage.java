@@ -2,20 +2,25 @@ package Flimma.Page;
 
 import Flimma.Application;
 import Flimma.Functions.DatabaseFilter;
+import Flimma.Functions.DatabaseLoader;
 import Flimma.Functions.InputException;
 import Flimma.Input;
+import Flimma.Main;
 import Flimma.Model.Database;
 import Flimma.Model.Film;
 import Flimma.Model.UserRating;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
 public class ListPage extends Page {
 
-    private static final int MAX_COUNT = 200;
+    private static final int MAX_COUNT = 20;
 
     private List<Film> films;
+    private int startIndex;
 
     public ListPage(Database database) {
         super(database);
@@ -26,11 +31,11 @@ public class ListPage extends Page {
     public void show() {
 
         // print table of films
-        Table table = new Table("%-5.5s", "%-30.30s", "%-30.30s", "%-20.20s", "%-10.10s", "%-30.30s", "%-30.30s", "%-5.5s", "%-5.5s", "%-5.5s", "%-5.5s");
+        Table table = new Table("%-5.5s", "%-30.30s", "%-30.30s", "%-20.20s", "%-10.10s", "%-30.30s", "%-30.30s", "%-7.7s", "%-5.5s", "%-6.6s", "%-5.5s");
 
         // print table head
         table.printLine();
-        table.printRowB("Id", "Name", "Plot", "Genre", "Released", "Actors", "Directors", "Imdb Votes", "Imdb ★", "Avg ★", "My ★");
+        table.printRow("Id", "Name", "Plot", "Genre", "Released", "Actors", "Directors", "Imdb Votes", "Imdb ★", "Avg ★", "My ★");
         table.printLine();
 
         // print table content
@@ -39,7 +44,7 @@ public class ListPage extends Page {
 
             Film film = films.get(i);
 
-            UserRating myUserRating = Application.getUser().getUserRating(film);
+            UserRating myUserRating = database.getUserRating(Application.getUser(), film);
             double myRating = (myUserRating == null) ? 0 : myUserRating.getRating();
             myRating *= 2;
 
@@ -49,6 +54,10 @@ public class ListPage extends Page {
             // rating form 0-10 like imdb
             avgRating *= 2;
             table.printRow(i, film, film.getPlot(), collectionToString(film.getGenres()), film.getRelased(), collectionToString(film.getActors()), collectionToString(film.getDirectors()), film.getImdbVotes(), film.getImdbRating(), avgRating, myRating);
+        }
+
+        if (count < films.size()) {
+            table.printRow("...", "...", "...", "...", "...", "...", "...", "...", "...", "...", "...");
         }
 
         // print table end
@@ -68,6 +77,10 @@ public class ListPage extends Page {
                 nextPage = new StartPage(database);
                 break;
 
+            case "next":
+                startIndex += MAX_COUNT;
+                break;
+
             case "rate":
                 // rate a film
                 int filmId = input.argToInt(1);
@@ -75,7 +88,13 @@ public class ListPage extends Page {
                 Film film = films.get(filmId);
 
                 // add rating to database
-                database.addRating(Application.getUser(), film, rating);
+                UserRating userRating = database.addRating(Application.getUser(), film, rating);
+                DatabaseLoader loader = new DatabaseLoader();
+                try {
+                    loader.saveRating(userRating, new File(Main.SAVE_PATH));
+                } catch (IOException e) {
+                    System.out.println("Error: Failed to save rating to file");
+                }
                 break;
 
             // FILTER
@@ -114,9 +133,10 @@ public class ListPage extends Page {
     @Override
     public void printHelp() {
         // print help
-        Table table = new Table("%-25.25s","%-20.20s");
+        Table table = new Table("%-30.30s","%-25.25s");
         table.printLine("ACTIONS","");
         table.printRow("start", "go back to start");
+        table.printRow("next / prev", "show next / prev page");
         table.printRow("rate      <filmId> <stars>", "rate a film");
         table.printRow("recommend <amount>", "get recommendation");
         table.printRow("", "");

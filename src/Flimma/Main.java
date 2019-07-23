@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            File file = new File( );
+            File file = new File(SAVE_PATH);
 
             Database database = new Database();
 
@@ -39,10 +39,13 @@ public class Main {
             e.printStackTrace();
         }
 
-
     }
 
-    // load static mode
+    /**
+     * load static-mode with given args
+     * @param database database
+     * @param args given args
+     */
     private static void loadStatic(Database database, String[] args) {
 
         FilmRecommender recommender = new FilmRecommender(database);
@@ -57,32 +60,23 @@ public class Main {
                     break;
 
                 case "--film":
-                    Film film = database.getFilms().stream()
-                            .filter(a -> a.getName().contains(parts[1]))
-                            .findFirst()
-                            .orElse(null);
+                    Film film = database.getFilm(parts[1]);
                     assert film != null;
                     recommender.addSimilarityScore(film, null);
                     break;
 
                 case "--actor":
-                    Actor actor = database.getActors().stream()
-                            .filter(a -> a.getName().equals(parts[1]))
-                            .findFirst()
-                            .orElse(null);
+                    Actor actor = database.getActor(parts[1]);
                     assert actor != null;
                     recommender.addActorScore(actor);
 
                 case "--director":
-                    Director director = database.getDirectors().stream()
-                            .filter(d -> d.getName().equals(parts[1]))
-                            .findFirst()
-                            .orElse(null);
+                    Director director = database.getDirector(parts[1]);
                     assert director != null;
                     recommender.addDirectorScore(director);
 
                 case "--limit":
-                    int limit =  Integer.parseInt(parts[1]);
+                    int limit = Integer.parseInt(parts[1]);
                     recommender.setLimit(limit);
                     break;
             }
@@ -95,7 +89,10 @@ public class Main {
         result.show();
     }
 
-    // load interactive mode
+    /**
+     * Loads the interactive-mode
+     * @param database database
+     */
     private static void loadInteractive(Database database) {
         Application.run(database);
     }

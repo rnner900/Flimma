@@ -13,7 +13,7 @@ public class LoginPage extends Page {
     public void show() {
         Table table = new Table("%-50.50s");
         table.printLine();
-        table.printRowB("Flimma Log In");
+        table.printRow("Flimma Log In");
         table.printLine();
 
         System.out.println("Please enter a username:");

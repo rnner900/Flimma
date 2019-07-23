@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 public class Film {
+
+    private final int id;
+
     private final String name;
     private final String plot;
     private final String relased;
@@ -19,7 +22,8 @@ public class Film {
 
     private final List<UserRating> userRatings;
 
-    public Film(String name, String plot, String genre, String released, int imdbVotes, double imdbRating) {
+    public Film(int id, String name, String plot, String genre, String released, int imdbVotes, double imdbRating) {
+        this.id = id;
         this.name = name;
         this.plot = plot;
         this.genres = new HashSet<>();
@@ -36,6 +40,8 @@ public class Film {
     }
 
     // getter methods
+    public int getId() { return id; }
+
     public String getName() {
         return name;
     }

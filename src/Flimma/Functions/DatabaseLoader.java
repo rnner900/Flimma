@@ -1,19 +1,21 @@
 package Flimma.Functions;
 
 import Flimma.Model.*;
-import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public final class DatabaseLoader {
 
-    // loads a database with content of a file
-    public void loadFromFile(@NotNull Database database, @NotNull File file) throws IOException {
+    /**
+     * loads a database with content of a file
+     * @param database database to load in
+     * @param file file to load from
+     * @throws IOException exception
+     */
+    public void loadFromFile(Database database, File file) throws IOException {
 
         if (!file.exists()) {
             System.out.println("File not found");
@@ -26,12 +28,12 @@ public final class DatabaseLoader {
         Map<Integer, Director> directors = new HashMap<>();
         Map<String, User> users = new HashMap<>();
 
-        try (BufferedReader br = new BufferedReader(new java.io.FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(file))) {
 
-            String line = br.readLine();
+            String line = reader.readLine();
 
             // actors
-            while (isEntity(line = br.readLine())) {
+            while (isEntity(line = reader.readLine())) {
 
                 String[] values = parseValues(line);
                 int id = parseInt(values[0], 0);
@@ -46,12 +48,12 @@ public final class DatabaseLoader {
             }
 
             // films
-            while (isEntity(line = br.readLine())) {
+            while (isEntity(line = reader.readLine())) {
 
                 String[] values = parseValues(line);
-                int id = parseInt(values[0], 0);
+                int filmId = parseInt(values[0], 0);
 
-                if (!films.containsKey(id)) {
+                if (!films.containsKey(filmId)) {
                     if (values.length < 5) {
                         System.out.println(line);
                         System.out.println(Arrays.toString(values));
@@ -60,20 +62,20 @@ public final class DatabaseLoader {
                     int imdbVotes = parseInt(values[5], 0);
                     double imdbRating = parseDouble(values[6], 0.0);
 
-                    Film film = new Film(values[1].trim(),values[2],values[3], values[4], imdbVotes, imdbRating);
-                    films.put(id, film);
+                    Film film = new Film(filmId, values[1].trim(),values[2],values[3], values[4], imdbVotes, imdbRating);
+                    films.put(filmId, film);
 
                     // add film to database
                     database.getFilms().add(film);
                 }
                 else {
-                    Film film = films.get(id);
+                    Film film = films.get(filmId);
                     film.getGenres().add(values[3]);
                 }
             }
 
             // directors
-            while (isEntity(line = br.readLine())) {
+            while (isEntity(line = reader.readLine())) {
 
                 String[] values = parseValues(line);
                 int id = parseInt(values[0], 0);
@@ -88,7 +90,7 @@ public final class DatabaseLoader {
             }
 
             // actor -> films
-            while (isEntity(line = br.readLine())) {
+            while (isEntity(line = reader.readLine())) {
 
                 String[] values = parseValues(line);
                 int actorId = parseInt(values[0], 0);
@@ -104,7 +106,7 @@ public final class DatabaseLoader {
             }
 
             // director -> films
-            while (isEntity(line = br.readLine())) {
+            while (isEntity(line = reader.readLine())) {
 
                 String[] values = parseValues(line);
                 int directorId = parseInt(values[0], 0);
@@ -120,7 +122,7 @@ public final class DatabaseLoader {
             }
 
             // username -> rating
-            while (isEntity(line = br.readLine())) {
+            while (isEntity(line = reader.readLine())) {
 
                 String[] values = parseValues(line);
                 String username = values[0];
@@ -145,7 +147,7 @@ public final class DatabaseLoader {
             }
         }
 
-        /*
+        /* // Show loading results
         System.out.println("Loaded:");
         System.out.println(database.getFilms().size() + " Films");
         System.out.println(database.getUsers().size() + " Users");
@@ -155,10 +157,66 @@ public final class DatabaseLoader {
          */
     }
 
+    /**
+     * Serialized a rating to the end of the file. If there already exists a rating in the file with the user and film it will be removed.
+     * @param rating rating
+     * @param file file to save to
+     * @throws IOException
+     */
+    public void saveRating(UserRating rating, File file) throws IOException {
+
+        File tempFile = new File("temp.db");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+
+            String username = rating.getUser().getUserName();
+            int filmId = rating.getFilm().getId();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!isUserRating(line, username, filmId)) {
+                    writer.write(line);
+                    writer.newLine();
+                }
+            }
+
+            writer.write("\"" + rating.getUser().getUserName() + "\",\"" + rating.getRating() + "\",\"" + filmId + "\"");
+            writer.newLine();
+
+        }
+
+        if (file.delete()) {
+            boolean success = tempFile.renameTo(file);
+        }
+    }
+
+    /**
+     * @param line line to check
+     * @param username username of user
+     * @param filmId id of film
+     * @return true if the line is a rating of the user and film
+     */
+    private boolean isUserRating(String line, String username, int filmId) {
+        return line.startsWith("\"" + username + "\"") &&
+                line.endsWith("\"" + filmId + "\"");
+    }
+
+    /**
+     * @param line line to check
+     * @return true if the line is a parsable entry
+     */
     private boolean isEntity(String line) {
         return line != null && !line.startsWith("New_Entity:");
     }
 
+
+    /**
+     * Helper method to parse string to integer
+     * @param input string
+     * @param defaultValue default value
+     * @return the parsed input or default value
+     */
     private static int parseInt(String input, int defaultValue) {
         try {
             defaultValue = Integer.parseInt(input);
@@ -168,6 +226,12 @@ public final class DatabaseLoader {
         return defaultValue;
     }
 
+    /**
+     * Helper method to parse string to double
+     * @param input string
+     * @param defaultValue default value
+     * @return the parsed input or default value
+     */
     private static double parseDouble(String input, double defaultValue) {
         try {
             defaultValue = Double.parseDouble(input);
@@ -176,6 +240,11 @@ public final class DatabaseLoader {
         return defaultValue;
     }
 
+    /**
+     * Helper method to parse a line into values
+     * @param line
+     * @return
+     */
     private String[] parseValues(String line) {
         line = line.substring(1, line.length()-1);  // remove first and last "
         return line.split("\",\"", -1); // split line by "," (also keep empty parts)

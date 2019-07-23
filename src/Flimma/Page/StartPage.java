@@ -19,7 +19,7 @@ public class StartPage extends Page {
     public void show() {
         Table table = new Table("%-50.50s");
         table.printLine();
-        table.printRowB("Hey " + Application.getUser().getUserName() + ", welcome to Flimma!");
+        table.printRow("Hey " + Application.getUser().getUserName() + ", welcome to Flimma!");
         table.printLine();
         table.printRow("You can always type in 'help' to get help for");
         table.printRow("the page you are on and 'exit' to exit the app");

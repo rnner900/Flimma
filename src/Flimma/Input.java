@@ -21,25 +21,44 @@ public class Input {
         return cmd;
     }
 
-    public int argToInt(int index) throws InputException {
+
+    /**
+     * gets the nth argument and parses it to an integer
+     * @param n
+     * @return parsed integer
+     * @throws InputException thrown if input is invalid (parse or out of range error)
+     */
+    public int argToInt(int n) throws InputException {
         try {
-            return Integer.parseInt(args[index]);
+            return Integer.parseInt(args[n]);
         } catch (Exception e) {
             throw new InputException();
         }
     }
 
-    public double argToDouble(int index) throws InputException {
+    /**
+     * gets the nth argument and parses it to an double
+     * @param n
+     * @return parsed double
+     * @throws InputException thrown if input is invalid (parse or out of range error)
+     */
+    public double argToDouble(int n) throws InputException {
         try {
-            return Double.parseDouble(args[index]);
+            return Double.parseDouble(args[n]);
         } catch (Exception e) {
             throw new InputException();
         }
     }
 
-    public String argToString(int index) throws InputException {
+    /**
+     * gets the nth argument
+     * @param n
+     * @return string
+     * @throws InputException thrown if input is invalid (out of range error)
+     */
+    public String argToString(int n) throws InputException {
         try {
-            return args[index];
+            return args[n];
         } catch (Exception e) {
             throw new InputException();
         }

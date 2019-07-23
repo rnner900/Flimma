@@ -1,7 +1,6 @@
 package Flimma.Functions;
 
 import Flimma.Model.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,10 +9,16 @@ public final class DatabaseFilter {
 
     private final Database database;
 
-    public DatabaseFilter(@NotNull Database database) {
+    public DatabaseFilter(Database database) {
         this.database = database;
     }
 
+    /**
+     * Filters out all films that do not contain a given genre
+     * @param films films to filter
+     * @param genre given genre
+     * @return filtered films
+     */
     public List<Film> filterGenre(List<Film> films, String genre) {
         if (genre != null) {
             // filter by genre
@@ -22,12 +27,26 @@ public final class DatabaseFilter {
         return films;
     }
 
-    public List<Film> filterName(@NotNull List<Film> films, @NotNull String filmname) {
+
+    /**
+     * Filters out all films that do not contain a given filmname
+     * @param films films to filter
+     * @param filmname given genre
+     * @return filtered films
+     */
+    public List<Film> filterName(List<Film> films, String filmname) {
          // filter by filmname
         return films.stream().filter(f -> f.getName().toLowerCase().contains(filmname.toLowerCase())).collect(Collectors.toList());
     }
 
-    public List<Film> filterActor(@NotNull List<Film> films, @NotNull String actor) {
+
+    /**
+     * Filters out all films that do not contain a by name given actor
+     * @param films films to filter
+     * @param actor given actor name
+     * @return filtered films
+     */
+    public List<Film> filterActor(List<Film> films, String actor) {
         // filter by actor
         List<Actor> actors = database.getActors();
         Actor actorMatch = actors.stream()
@@ -38,7 +57,14 @@ public final class DatabaseFilter {
         return films.stream().filter(f -> f.getActors().contains(actorMatch)).collect(Collectors.toList());
     }
 
-    public List<Film> filterDirector(@NotNull List<Film> films, @NotNull String director) {
+
+    /**
+     * Filters out all films that do not contain a by name given actor
+     * @param films films to filter
+     * @param director given director name
+     * @return filtered films
+     */
+    public List<Film> filterDirector(List<Film> films, String director) {
         // filter by director
         List<Director> directors = database.getDirectors();
         Director directorMatch = directors.stream()
@@ -49,7 +75,14 @@ public final class DatabaseFilter {
         return films.stream().filter(f -> f.getDirectors().contains(directorMatch)).collect(Collectors.toList());
     }
 
-    public List<Film> limit(@NotNull List<Film> films, int limit) {
+
+    /**
+     * Limits the amount of films
+     * @param films films to limit
+     * @param limit limit
+     * @return limited films
+     */
+    public List<Film> limit(List<Film> films, int limit) {
         if (limit > 0)
         {
             // limit results
@@ -58,12 +91,19 @@ public final class DatabaseFilter {
         return films;
     }
 
-    public List<Film> filterRatedBy(List<Film> films, String ratedBy) {
-        if (ratedBy != null) {
-            // get films rated by a user
-            User ratedByUser = database.getUsers().stream().filter(u -> u.getUserName().equals(ratedBy)).findFirst().orElse(null);
-            if (ratedByUser != null) {
-                return films.stream().filter(f -> ratedByUser.getUserRating(f) != null).collect(Collectors.toList());
+
+    /**
+     * Filters out all films that are not rated by a given user
+     * @param films films to filter
+     * @param userName username of given user
+     * @return filtered films
+     */
+    public List<Film> filterRatedBy(List<Film> films, String userName) {
+        if (userName != null) {
+
+            User user = database.getUser(userName);
+            if (user != null) {
+                return films.stream().filter(f -> database.getUserRating(user, f) != null).collect(Collectors.toList());
             } else {
                 System.out.println("User not found!");
             }

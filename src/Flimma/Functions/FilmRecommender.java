@@ -85,7 +85,11 @@ public final class FilmRecommender {
     }
 
 
-    // Manual scores
+    /**
+     * A usergroup liked a given film. Add 1 to the score for all films the usergroup also liked.
+     * @param film a given film
+     * @param ignoreUser user ignored from the usergroup if it is not null
+     */
     public void addSimilarityScore(@NotNull final Film film, User ignoreUser) {
         // increase rating score
         for (UserRating otherUserRating : film.getUserRatings()) {
@@ -115,6 +119,10 @@ public final class FilmRecommender {
         }
     }
 
+    /**
+     * Add 1 to the score of a given genre
+     * @param genre given genre
+     */
     public void addGenreScore(@NotNull final String genre) {
         Integer genreScore = genreScores.getOrDefault(genre, 0) + 1;
         genreScores.put(genre, genreScore);
@@ -124,6 +132,10 @@ public final class FilmRecommender {
         }
     }
 
+    /**
+     * Add 1 to the score of a given actor
+     * @param actor given actor
+     */
     public void addActorScore(@NotNull final Actor actor) {
         Integer actorScore = actorScores.getOrDefault(actor, 0) + 1;
         actorScores.put(actor, actorScore);
@@ -133,6 +145,10 @@ public final class FilmRecommender {
         }
     }
 
+    /**
+     * Add 1 to the score of a given director
+     * @param director given director
+     */
     public void addDirectorScore(@NotNull final Director director) {
         Integer directorScore = directorScores.getOrDefault(director, 0) + 1;
         directorScores.put(director, directorScore);
@@ -142,11 +158,19 @@ public final class FilmRecommender {
         }
     }
 
+    /**
+     * Set a limit for the resulting recommendations
+     * @param limit limit
+     */
     public void setLimit(final int limit) {
         this.limit = limit;
     }
 
-    // Set Scores by User Ratings
+    /**
+     * Determine all scores by a user automatically
+     * @param myUser user
+     * @param limit limit
+     */
     public void setScoresAuto(@NotNull final User myUser, int limit) {
 
         this.limit = limit;
@@ -181,19 +205,11 @@ public final class FilmRecommender {
         }
     }
 
+    /**
+     * Get recommendations based on all scores
+     * @return list of recommendatitons
+     */
     public List<Film> getRecommendation() {
-
-        // print table of scores
-        Table table = new Table("%-20.20s", "%-5.5s", "%-5.5s", "%-5.5s", "%-5.5s", "%-5.5s");
-        // print table head
-        table.printLine();
-        table.printRowB("Name", "Ratings", "Genre", "Actors", "Directors", "Ranking");
-        table.printLine();
-
-
-        // determine the max scores for normalizing
-
-
 
         // Finding Recommendations
         FilmRanker ranker = new FilmRanker(database);
@@ -237,14 +253,10 @@ public final class FilmRecommender {
             double totalScore = (rankingScore + similarityScore + genreScore + actorScore + directorScore) / 5;
 
             filmScores.put(film, totalScore);
-            table.printRow(film.getDisplayName(), similarityScore, genreScore, actorScore, directorScore, rankingScore);
         }
 
         Stream<Map.Entry<Film, Double>> sorted = filmScores.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()));
-
-        // print table end
-        table.printLine();
 
         return sorted.map(Map.Entry::getKey).limit(limit).collect(Collectors.toList());
     }

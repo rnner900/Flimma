@@ -22,13 +22,6 @@ public class User {
         return userRatings;
     }
 
-    public UserRating getUserRating(Film film) {
-        return userRatings.stream()
-                .filter(r -> r.getFilm() == film)
-                .findFirst()
-                .orElse(null);
-    }
-
     @Override
     public String toString() {
         return userName;

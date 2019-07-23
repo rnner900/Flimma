@@ -14,25 +14,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Flimma/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+            <state relative-caret-position="340">
+              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2975#2976#0" expanded="true" />
+                <element signature="e#3016#3017#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/FilmRanker.java">
+        <entry file="file://$PROJECT_DIR$/src/Flimma/Model/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
+            <state relative-caret-position="357">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#344#345#0" expanded="true" />
+                <element signature="e#375#376#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -41,26 +45,34 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Flimma/Model/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="48" column="21" lean-forward="true" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+            <state relative-caret-position="408">
+              <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1297#1298#0" expanded="true" />
-                <element signature="e#1325#1326#0" expanded="true" />
+                <element signature="e#1321#1322#0" expanded="true" />
+                <element signature="e#1349#1350#0" expanded="true" />
+                <element signature="e#1385#1386#0" expanded="true" />
+                <element signature="e#1413#1414#0" expanded="true" />
+                <element signature="e#1451#1452#0" expanded="true" />
+                <element signature="e#1480#1481#0" expanded="true" />
+                <element signature="e#1524#1525#0" expanded="true" />
+                <element signature="e#1556#1557#0" expanded="true" />
+                <element signature="e#1604#1605#0" expanded="true" />
+                <element signature="e#1638#1639#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/FilmRecommender.java">
+        <entry file="file://$PROJECT_DIR$/src/Flimma/Page/ListPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="56" column="42" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="42" />
+            <state relative-caret-position="242">
+              <caret line="93" column="32" selection-start-line="93" selection-start-column="32" selection-end-line="93" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5086#5087#0" expanded="true" />
-                <element signature="e#5120#5121#0" expanded="true" />
+                <element signature="e#4656#4657#0" expanded="true" />
+                <element signature="e#4690#4691#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -69,45 +81,34 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Flimma/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+            <state relative-caret-position="484">
+              <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2557#2558#0" expanded="true" />
+                <element signature="e#2584#2585#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Flimma/Page/Page.java">
+        <entry file="file://$PROJECT_DIR$/src/Flimma/Input.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#214#215#0" expanded="true" />
-                <element signature="e#254#255#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="297">
+              <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Flimma/Page/Table.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/DatabaseLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+            <state relative-caret-position="276">
+              <caret line="182" lean-forward="true" selection-start-line="182" selection-end-line="182" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#7126#7127#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,8 +117,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Flimma/Test/DatabaseTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+            <state relative-caret-position="408">
+              <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -125,14 +129,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Flimma/Model/Film.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+            <state relative-caret-position="528">
+              <caret line="81" column="1" selection-start-line="81" selection-start-column="1" selection-end-line="81" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1303#1304#0" expanded="true" />
-                <element signature="e#1335#1336#0" expanded="true" />
-                <element signature="e#1372#1373#0" expanded="true" />
-                <element signature="e#1405#1406#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/DatabaseFilter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="107" column="54" selection-start-line="107" selection-start-column="54" selection-end-line="107" selection-end-column="54" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,7 +162,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>l</find>
       <find>ac</find>
       <find>2.5</find>
       <find>Robert Jones</find>
@@ -177,9 +188,14 @@
       <find>da</find>
       <find>parse</find>
       <find>MIN_VOTES_FLIMMA</find>
+      <find>@NotNull</find>
+      <find>stream</find>
+      <find>.stream().</find>
+      <find>.stream()</find>
     </findStrings>
     <replaceStrings>
       <replace>Score</replace>
+      <replace />
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -188,11 +204,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Flimma/View/InvalidArgsException.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Controller/Score.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Model/Graph/RatingGraph.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Model/FilmScore.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/View/View.java" />
         <option value="$PROJECT_DIR$/src/Flimma/View/StartView.java" />
         <option value="$PROJECT_DIR$/src/Flimma/View/RListView.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Page/ListView.java" />
@@ -211,8 +222,6 @@
         <option value="$PROJECT_DIR$/movieproject.db" />
         <option value="$PROJECT_DIR$/movieproject_original.db" />
         <option value="$PROJECT_DIR$/src/Flimma/Controller/DatabaseSaver.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Model/User.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Test/DatabaseTest.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Controller/MenuBuilder.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Controller/InputException.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Controller/FilmRecommender.java" />
@@ -221,32 +230,39 @@
         <option value="$PROJECT_DIR$/src/Flimma/Parser.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Controller/DatabaseLoader.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Controller/FilmRanker.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Functions/InputException.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Functions/DatabaseSaver.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Model/Actor.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Model/Director.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Page/StartPage.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Page/LoginPage.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Page/ListPage.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Functions/DatabaseSaver.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Functions/DatabaseLoader.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Model/Actor.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Functions/DatabaseFilter.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Model/Director.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Functions/RatingSystem.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Functions/RatingHelper.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Functions/DatabaseController.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Model/Film.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Functions/DatabaseIO.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Functions/FilmRanker.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Functions/FilmRecommender.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Input.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Functions/InputException.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Page/Page.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Page/Table.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Input.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Functions/DatabaseSelector.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Application.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Model/Database.java" />
-        <option value="$PROJECT_DIR$/src/Flimma/Functions/FilmRanker.java" />
         <option value="$PROJECT_DIR$/src/Flimma/Main.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Test/DatabaseTest.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Model/User.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Functions/DatabaseFilter.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Model/Database.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Page/ListPage.java" />
+        <option value="$PROJECT_DIR$/src/Flimma/Functions/DatabaseLoader.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="207" />
-    <option name="y" value="-30" />
-    <option name="width" value="2423" />
-    <option name="height" value="1100" />
+    <option name="x" value="165" />
+    <option name="y" value="-24" />
+    <option name="width" value="1939" />
+    <option name="height" value="880" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -254,6 +270,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -293,12 +311,17 @@
               <item name="Flimma" type="462c0819:PsiDirectoryNode" />
               <item name="Page" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Flimma" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Flimma" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Flimma" type="462c0819:PsiDirectoryNode" />
+              <item name="Test" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -397,25 +420,26 @@
       <workItem from="1562582137848" duration="13820000" />
       <workItem from="1562619330924" duration="11013000" />
       <workItem from="1562789453701" duration="6701000" />
+      <workItem from="1563867174046" duration="13911000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="224084000" />
+    <option name="totallyTimeSpent" value="237995000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.79036826" visible="true" weight="0.21073826" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.79036826" visible="true" weight="0.16950959" />
       <window_info id="Structure" order="1" sideWeight="0.20963173" side_tool="true" weight="0.17248322" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection Results" weight="0.32936078" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.24787535" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.24702059" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.49187434" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.398017" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -427,6 +451,7 @@
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32394367" />
+      <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24966443" />
@@ -437,43 +462,23 @@
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.79036826" visible="true" weight="0.14872068" />
-      <window_info id="Structure" order="1" sideWeight="0.20963173" side_tool="true" weight="0.17248322" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32827735" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.5709643" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.398017" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3286119" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32719395" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24966443" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" />
-      <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Flimma/Functions/FilmRanker.java</url>
+          <line>18</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Flimma/View/Alert.java" />
     <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/io/FileOutputStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
@@ -583,16 +588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Page/LoginPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/util/Collections.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-413">
@@ -600,12 +595,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Page/StartPage.java">
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Page/LoginPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="44" column="61" selection-start-line="44" selection-start-column="61" selection-end-line="44" selection-end-column="61" />
+        <state relative-caret-position="199">
+          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Page/StartPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="21" column="22" lean-forward="true" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/DatabaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/DatabaseSaver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="97" column="16" lean-forward="true" selection-start-line="97" selection-start-column="16" selection-end-line="99" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/FilmRanker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#561#562#0" expanded="true" />
+            <element signature="e#601#602#0" expanded="true" />
+            <element signature="e#705#706#0" expanded="true" />
+            <element signature="e#753#754#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/FilmRecommender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="69" column="33" lean-forward="true" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5689#5690#0" expanded="true" />
+            <element signature="e#5723#5724#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -617,56 +665,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#344#345#0" expanded="true" />
-            <element signature="e#375#376#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Model/UserRating.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/DatabaseSaver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="38" column="124" selection-start-line="38" selection-start-column="124" selection-end-line="38" selection-end-column="124" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Page/ListPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="124" column="35" selection-start-line="124" selection-start-column="35" selection-end-line="124" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Flimma/Model/Actor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/DatabaseFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -677,72 +679,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Model/Film.java">
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Model/UserRating.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1303#1304#0" expanded="true" />
-            <element signature="e#1335#1336#0" expanded="true" />
-            <element signature="e#1372#1373#0" expanded="true" />
-            <element signature="e#1405#1406#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="425">
+          <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Flimma/Page/Page.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#214#215#0" expanded="true" />
-            <element signature="e#254#255#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Test/DatabaseTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Flimma/Page/Table.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+        <state relative-caret-position="493">
+          <caret line="31" column="43" lean-forward="true" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Flimma/Input.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-          <folding>
-            <element signature="method#argToString#0;class#Input#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/FilmRecommender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="56" column="42" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5086#5087#0" expanded="true" />
-            <element signature="e#5120#5121#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="297">
+          <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Flimma/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+        <state relative-caret-position="484">
+          <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2557#2558#0" expanded="true" />
+            <element signature="e#2584#2585#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Model/Film.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="81" column="1" selection-start-line="81" selection-start-column="1" selection-end-line="81" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#344#345#0" expanded="true" />
+            <element signature="e#375#376#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/DatabaseFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="107" column="54" selection-start-line="107" selection-start-column="54" selection-end-line="107" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -751,30 +756,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Flimma/Model/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="48" column="21" lean-forward="true" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+        <state relative-caret-position="408">
+          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1297#1298#0" expanded="true" />
-            <element signature="e#1325#1326#0" expanded="true" />
+            <element signature="e#1321#1322#0" expanded="true" />
+            <element signature="e#1349#1350#0" expanded="true" />
+            <element signature="e#1385#1386#0" expanded="true" />
+            <element signature="e#1413#1414#0" expanded="true" />
+            <element signature="e#1451#1452#0" expanded="true" />
+            <element signature="e#1480#1481#0" expanded="true" />
+            <element signature="e#1524#1525#0" expanded="true" />
+            <element signature="e#1556#1557#0" expanded="true" />
+            <element signature="e#1604#1605#0" expanded="true" />
+            <element signature="e#1638#1639#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/FilmRanker.java">
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Test/DatabaseTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/DatabaseLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+        <state relative-caret-position="408">
+          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -783,10 +786,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Flimma/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+        <state relative-caret-position="340">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2975#2976#0" expanded="true" />
+            <element signature="e#3016#3017#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Page/ListPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="93" column="32" selection-start-line="93" selection-start-column="32" selection-end-line="93" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4656#4657#0" expanded="true" />
+            <element signature="e#4690#4691#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Flimma/Functions/DatabaseLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="182" lean-forward="true" selection-start-line="182" selection-end-line="182" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7126#7127#0" expanded="true" />
           </folding>
         </state>
       </provider>

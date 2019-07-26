@@ -1,10 +1,13 @@
 package Flimma.Functions;
 
-import Flimma.Model.*;
+import Flimma.Models.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Filters a list of films by criteria
+ */
 public final class DatabaseFilter {
 
     private final Database database;

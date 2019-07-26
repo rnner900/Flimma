@@ -1,53 +1,61 @@
 package Flimma.Functions;
 
-import Flimma.Model.*;
-import Flimma.Page.Table;
-import org.jetbrains.annotations.NotNull;
+import Flimma.Models.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-/* ALGORITHM:
-- Setup the Scores (Auto):
-    For recommendations there are 4 criteria (ratings, genre, actor, director).
-    Based on 'my' personal ratings we can determine likes / scores for each criteria:
-
-    Similarity-Score (Film -> Integer):
-        Another user also liked one one 'my' liked film. The score for all film the other user also liked will be incremented.
-        Example: two other users, who also liked film 'a', like film 'b'. Therefore the score of film 'b' is 2
-
-    Genre-Score (Genre -> Integer):
-        I like a film of a genre. The score for the genre will be incremented.
-        Example: i liked three films of genre 'Animation'. Therefore the score of 'Animation' is 3
-
-    Actor-Score (Actor -> Integer):
-        I liked a film with actors. The score of each actor will be incremented.
-        Example: i liked four films with actor 'a'. Therefore the score of 'a' is 4
-
-    Director-Score (Director -> Integer):
-        I liked a film with director. The score of each director will be incremented.
-        Example: i liked four films with actor 'a'. Therefore the score of 'a' is 4
-
-    Ranking-Score (Film -> Integer):
-        Global ranking score for film. Not related to 'my' personal ratings
-
-    Each score will be normalized (divided by the max score of criteria).
-    Therefore if a Genre is the most liked of all it will have a score of 1.
-
-
-- Setup the Scores (Manually):
-    for the Static-Mode we need add functions to set the scores manually.
-
-- To get a Recommendation:
-    1. Looking through all films of database
-    2. lookup the scores of each criteria and take the sum of them as the Total-Score.
-        At this point we can set different weights for each criteria
-        Note:    if more than one liked actor or director is in a film, the film can score more 1 for the criteria.
-                 TODO: Normalize the actor and director sore for a film for more control
-    3. sort all films by their Total-Score.
-    4. take first n films as a result.
+/**
+ * Determines recommendation related to different scores in criteria
+ * <pre>
+ * ALGORITHM:
+ *
+ *     For recommendations there are 4 criteria (ratings, genre, actor, director).
+ *     Based on 'my' personal ratings we can determine likes (scores) for each criteria:
+ *
+ *     Genre-Score (Genre : Integer):
+ *         I like a film of a genre. The score for the genre will be incremented.
+ *         Example: i liked three films of genre 'Animation'. Therefore the score of 'Animation' is 3
+ *
+ *     Actor-Score (Actor : Integer):
+ *         I liked a film with actors. The score of each actor will be incremented.
+ *         Example: i liked four films with actor 'a'. Therefore the score of 'a' is 4
+ *
+ *     Director-Score (Director : Integer):
+ *         I liked a film with directors. The score of each director will be incremented.
+ *         Example: i liked four films with director 'b'. Therefore the score of 'b' is 4
+ *
+ *     Similarity-Score (Film : Integer):
+ *         Another user also liked one of 'my' liked film. The score for all film the other user also liked will be incremented.
+ *         Example: i liked film 'a'. Two other users, who also liked film 'a', like film 'b'. Therefore the score of film 'b' is 2
+ *
+ *     Ranking-Score (Film : Integer):
+ *         Global ranking score for film determined by Imdb and all Flimma ratings. Not related to 'my' personal ratings
+ *         Example: film 'c' is on 5th global rank. Therefore its score is 0.95. A score of 1 is the first global rank.
+ *
+ *     Each score will be normalized (divided by the max score of criteria).
+ *     Therefore the scores of each criteria lay between 0 and 1.
+ *     Example: A Genre is the most liked of all genres. Therefore its score will be normalized to 1.
+ *              A Actor 'a' has a score of 5. The best Actor 'b' has a score of 15. Therefore the score of 'a' will be 0.333
+ *
+ *
+ * - Setup the Scores (Manually):
+ *     for the static-mode we need add functions to increment the scores manually.
+ *     We leave all scores at 0 except the entities we want to select
+ *
+ * - To get a Recommendation:
+ *     1. Looking through all films of database
+ *     2. lookup the scores of each criteria and take the sum of them as the total-score.
+ *         At this point we can set different weights for each criteria
+ *         Note:    if there are multiple actors with a score in a film, the film can score more 1 for the actor criteria (same for directors)
+ *
+ *     3. sort all films by their total-score.
+ *     4. take first n films as a result.
+ *
+ * - Let's go!
+ * </pre>
  */
 
 
@@ -73,7 +81,7 @@ public final class FilmRecommender {
     private int actorScoreMax;
     private int directorScoreMax;
 
-    public FilmRecommender(@NotNull final Database database) {
+    public FilmRecommender(final Database database) {
         this.database = database;
 
         similarityScores = new HashMap<>();
@@ -86,11 +94,14 @@ public final class FilmRecommender {
 
 
     /**
-     * A usergroup liked a given film. Add 1 to the score for all films the usergroup also liked.
+     * Add 1 to the score for all films similar users also liked
      * @param film a given film
      * @param ignoreUser user ignored from the usergroup if it is not null
      */
-    public void addSimilarityScore(@NotNull final Film film, User ignoreUser) {
+    public void addSimilarityScore(final Film film, User ignoreUser) {
+
+        ignoredFilms.add(film);
+
         // increase rating score
         for (UserRating otherUserRating : film.getUserRatings()) {
             // user that also liked this film
@@ -123,7 +134,7 @@ public final class FilmRecommender {
      * Add 1 to the score of a given genre
      * @param genre given genre
      */
-    public void addGenreScore(@NotNull final String genre) {
+    public void addGenreScore(final String genre) {
         Integer genreScore = genreScores.getOrDefault(genre, 0) + 1;
         genreScores.put(genre, genreScore);
 
@@ -136,7 +147,7 @@ public final class FilmRecommender {
      * Add 1 to the score of a given actor
      * @param actor given actor
      */
-    public void addActorScore(@NotNull final Actor actor) {
+    public void addActorScore(final Actor actor) {
         Integer actorScore = actorScores.getOrDefault(actor, 0) + 1;
         actorScores.put(actor, actorScore);
 
@@ -149,7 +160,7 @@ public final class FilmRecommender {
      * Add 1 to the score of a given director
      * @param director given director
      */
-    public void addDirectorScore(@NotNull final Director director) {
+    public void addDirectorScore(final Director director) {
         Integer directorScore = directorScores.getOrDefault(director, 0) + 1;
         directorScores.put(director, directorScore);
 
@@ -171,7 +182,7 @@ public final class FilmRecommender {
      * @param myUser user
      * @param limit limit
      */
-    public void setScoresAuto(@NotNull final User myUser, int limit) {
+    public void setScoresAuto(final User myUser, int limit) {
 
         this.limit = limit;
 
@@ -180,8 +191,6 @@ public final class FilmRecommender {
             // increase similarity score
             Film film = myUserRating.getFilm();
             double rating = myUserRating.getRating();
-
-            ignoredFilms.add(film);
 
             // skip film if 'i' didn't like the film (rating < 3.5)
             if (rating > RECOMMEND_CLIPPING) {
@@ -213,6 +222,7 @@ public final class FilmRecommender {
 
         // Finding Recommendations
         FilmRanker ranker = new FilmRanker(database);
+
         Map<Film, Double> filmScores = new HashMap<>();
         for (Film film : database.getFilms()) {
 
@@ -224,30 +234,36 @@ public final class FilmRecommender {
             double rankingScore = ranker.getNormalizedRankScore(film); // returns value between 0 and 1
 
             // add normalized score
-            double similarityScore = similarityScores.getOrDefault(film, 0) / (double)similarityScoreMax;
+            double similarityScore = 0;
+            if (similarityScoreMax > 0) {
+                similarityScore = similarityScores.getOrDefault(film, 0) / (double) similarityScoreMax;
+            }
 
             // genre
             double genreScore = 0;
-            for (String genre : film.getGenres()) {
-                // add normalized score
-                genreScore += genreScores.getOrDefault(genre, 0) / (double)genreScoreMax;
-                // TODO: Normalize genreScore
+            if (genreScoreMax > 0) {
+                for (String genre : film.getGenres()) {
+                    // add normalized score
+                    genreScore += genreScores.getOrDefault(genre, 0) / (double) genreScoreMax;
+                }
             }
 
             // actors
             double actorScore = 0;
-            for (Actor actor : film.getActors()) {
-                // add normalized score
-                actorScore += actorScores.getOrDefault(actor, 0) / (double)actorScoreMax;
-                // TODO: Normalize actorScore
+            if (actorScoreMax > 0) {
+                for (Actor actor : film.getActors()) {
+                    // add normalized score
+                    actorScore += actorScores.getOrDefault(actor, 0) / (double) actorScoreMax;
+                }
             }
 
             // directors
             double directorScore = 0;
-            for (Director director : film.getDirectors()) {
-                // add normalized score
-                directorScore += directorScores.getOrDefault(director, 0) / (double)directorScoreMax;
-                // TODO: Normalize directorScore
+            if (directorScoreMax > 0) {
+                for (Director director : film.getDirectors()) {
+                    // add normalized score
+                    directorScore += directorScores.getOrDefault(director, 0) / (double) directorScoreMax;
+                }
             }
 
             double totalScore = (rankingScore + similarityScore + genreScore + actorScore + directorScore) / 5;

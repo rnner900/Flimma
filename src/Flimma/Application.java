@@ -1,16 +1,15 @@
 package Flimma;
 
 import Flimma.Functions.InputException;
-import Flimma.Model.Database;
-import Flimma.Model.User;
-import Flimma.Page.LoginPage;
-import Flimma.Page.Page;
-import Flimma.Page.StartPage;
+import Flimma.Models.Database;
+import Flimma.Models.User;
+import Flimma.Pages.LoginPage;
+import Flimma.Pages.Page;
+import Flimma.Pages.StartPage;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
+/**
+ * Runtime application for interactive-mode
+ */
 public class Application {
 
     private static User user;
@@ -24,7 +23,6 @@ public class Application {
         database = pDatabase;
 
         Page activePage = new StartPage(database);
-        Input input = new Input("");
 
         while (activePage != null)
         {
@@ -33,33 +31,41 @@ public class Application {
                 activePage = new LoginPage(database);
             }
 
-            // show page if last input was not 'help'
-            if (!input.getCmd().equals("help")) {
-                activePage.show();
+            // show page
+            activePage.show();
 
-            }
+            boolean repeat = true;
 
-            // user input
-            System.out.print("> ");
-            input = waitForInput();
+            while(repeat) {
 
-            if (input.getCmd().equals("help")) {
-                // print help of current page
-                activePage.printHelp();
-            }
-            else if (input.getCmd().equals("exit")) {
-                // exit application
-                activePage = null;
-            }
-            else {
-                try {
-                    // call current page onInput. It returns the next page to show
-                    activePage = activePage.onInput(input);
-                    clearPage();
+                repeat = false;
 
-                } catch (InputException e) {
-                    // page will throw error if input is not valid (index out of range for missing arguments for example)
-                    System.out.println("Please check your input. Type in 'help' to get more information...");
+                // user input
+                System.out.println();
+                String pageName = activePage.getClass().getSimpleName().replace("Page", "");
+                System.out.print("(" +  pageName + "): ");
+                String input = Input.inputStr().trim();
+
+                if (input.startsWith("help")) {
+                    // print help of current page
+                    activePage.printHelp();
+                    repeat = true;
+
+                } else if (input.startsWith("exit")) {
+                    // exit application
+                    activePage = null;
+
+                } else {
+                    try {
+                        // call current page onInput. It returns the next page to show
+                        activePage = activePage.onInput(input);
+                        clearPage();
+
+                    } catch (InputException e) {
+                        // page will throw error if input is not valid (index out of range for missing arguments for example)
+                        System.out.println("Please check your input. Type in 'help' to get more information...");
+                        repeat = true;
+                    }
                 }
             }
         }
@@ -67,8 +73,8 @@ public class Application {
 
     /**
      * set the current user by a username. If the user does not exist a new user will be created and logged in
-     * @param username
-     * @return
+     * @param username username
+     * @return true if login was successful
      */
     public static boolean setUser(String username) {
         user = database.getUser(username);
@@ -86,22 +92,6 @@ public class Application {
      */
     public static User getUser() {
         return user;
-    }
-
-    /**
-     * waits for a user input
-     * @return user input
-     */
-    private static Input waitForInput() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            String input = reader.readLine();
-            return new Input(input);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new Input("");
-        }
     }
 
     /**

@@ -1,12 +1,15 @@
 package Flimma.Functions;
 
-import Flimma.Model.*;
+import Flimma.Models.*;
 
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Loads a database from file, saves UserRatings to file
+ */
 public final class DatabaseLoader {
 
     /**
@@ -16,11 +19,6 @@ public final class DatabaseLoader {
      * @throws IOException exception
      */
     public void loadFromFile(Database database, File file) throws IOException {
-
-        if (!file.exists()) {
-            System.out.println("File not found");
-            return;
-        }
 
         // id look up tables for deserialization
         Map<Integer, Actor> actors = new HashMap<>();
@@ -147,7 +145,8 @@ public final class DatabaseLoader {
             }
         }
 
-        /* // Show loading results
+        /*
+        // Show loading results
         System.out.println("Loaded:");
         System.out.println(database.getFilms().size() + " Films");
         System.out.println(database.getUsers().size() + " Users");
@@ -158,10 +157,11 @@ public final class DatabaseLoader {
     }
 
     /**
-     * Serialized a rating to the end of the file. If there already exists a rating in the file with the user and film it will be removed.
+     * Serialized a rating to the end of the file <br>
+     * If there already exists a rating in the file with the user and film it will be removed.
      * @param rating rating
      * @param file file to save to
-     * @throws IOException
+     * @throws IOException exception
      */
     public void saveRating(UserRating rating, File file) throws IOException {
 
